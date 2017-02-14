@@ -3,21 +3,22 @@
 //-------------------------VARIABLES-------------------------
 var timeSlot = {
   label: 'Times: ',
-  times: ['6 am: ', '7 am: ', '8 am: ', '9 am: ', '10 am: ', '11 am: ', '12 pm: ', '1 pm: ', '2 pm: ', '3 pm: ', '4 pm: ', '5 pm: ', '6 pm: ', '7 pm: ']
+  times: ['6am|', '7am|', '8am|', '9am|', '10am|', '11am|', '12pm|', '1pm|', '2pm|', '3pm|', '4pm|', '5pm|', '6pm|', '7pm|'],
+  totalLabel: 'Total|'
 };
-var pikePlace = new CookieStore ('First and Pike', 23, 65, 6.3);
+var pikePlace = new CookieStore ('First and Pike:', 23, 65, 6.3);
 // console.log(pikePlace.displayCookies());
-var seaTac = new CookieStore ('SeaTac', 3, 24, 1.2);
+var seaTac = new CookieStore ('SeaTac:', 3, 24, 1.2);
 // console.log(seaTac.displayCookies());
-var seattleCenter = new CookieStore('Seattle Center', 11, 38, 3.7);
+var seattleCenter = new CookieStore('Seattle Center:', 11, 38, 3.7);
 // console.log(seattleCenter.displayCookies());
-var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
+var capHill = new CookieStore('Capitol Hill:', 20, 38, 2.3);
 // console.log(capHill.displayCookies());
-var alki = new CookieStore('Alki', 2, 16, 4.6);
+var alki = new CookieStore('Alki:', 2, 16, 4.6);
 // console.log(alki.displayCookies());
 var tableEl = document.createElement('table');
 var stores = [pikePlace, seaTac, seattleCenter, capHill, alki];
-var total = [];
+var total = 0;
 //----------------------For Loop to run through the times------------
 
 var rowOneEl = document.createElement('tr');
@@ -31,6 +32,9 @@ for (var k = 0; k < timeSlot.times.length ; k++){
   timeLabelEl.textContent = currentTime[k];
   rowOneEl.appendChild(timeLabelEl);
 };
+var totalHead = document.createElement('th');
+totalHead.textContent = timeSlot.totalLabel;
+rowOneEl.appendChild(totalHead);
 
 tableEl.appendChild(rowOneEl);
 
@@ -50,10 +54,15 @@ for(var i = 0; i < stores.length; i++){
     var timeEl = document.createElement('td');
     timeEl.textContent = cph();
     rowEl.appendChild(timeEl);
-    total.push(this.cph());
+    total += cph();
   }
-
+  //log to dom the total in a column
+  console.log(currentStore.name + ' ' + total);
   tableEl.appendChild(rowEl);
+  var totalEl = document.createElement('td');
+  totalEl.textContent = total;
+  rowEl.appendChild(totalEl);
+  total = 0;
 };
 
 document.body.appendChild(tableEl);
