@@ -4,7 +4,16 @@ var storeLocations = [
     htmlId: 'first-and-pike',
     minCustomerPerHour: 23,
     maxCustomerPerHour: 65,
-    avgCookiesPerCustomer: 6.3
+    avgCookiesPerCustomer: 6.3,
+    calculations: function(){
+      for (var j = 0; j < timeSlot.length ; j++) {
+        var userElement = document.createElement('li');
+        var displayHourAndAvg = timeSlot[j] + cookiesPerHour(i);
+        console.log(displayHourAndAvg);
+        userElement.textContent += displayHourAndAvg;
+        sectionEl.appendChild(userElement);
+      }
+    }
   },
   {
     htmlId: 'seatacAirport',
@@ -44,9 +53,8 @@ var timeSlot = [
   '6 pm: ',
   '7 pm: ',
   '8 pm: ',
-
-
 ];
+console.log(storeLocations[0].calculations());
 //this logs the min cust per hour to the page
 // var minEl = document.createElement('h1');
 // minEl.setAttribute('id', storeLocations[0].htmlId + '-min');
@@ -81,12 +89,12 @@ function cookiesPerHour (index) {
 
 var sectionEl = document.getElementById('test');
 //now i need to make a for loop to display the random
-for (var i = 0; i < storeLocations.length; i++){
-  if (j === 0){
-    var storeEl = document.getElementById('test');
-    var storeName = document.createElement('li');
-    storeName.textContent = storeLocations[index].htmlId;
-    storeEl.appendChild(storeName);
+for (var i = 0; i < store.length; i++){
+  // if (j === 0){
+  //   var storeEl = document.getElementById('test');
+  //   var storeName = document.createElement('li');
+  //   storeName.textContent = storeLocations[index].htmlId;
+  //   storeEl.appendChild(storeName);
   }
   for (var j = 0; j < timeSlot.length ; j++) {
     var userElement = document.createElement('li');
@@ -95,7 +103,6 @@ for (var i = 0; i < storeLocations.length; i++){
     userElement.textContent += displayHourAndAvg;
     sectionEl.appendChild(userElement);
   }
-}
 
 // userElement.setAttribute('id', 'test');
 
