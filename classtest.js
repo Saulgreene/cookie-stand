@@ -1,5 +1,43 @@
 'use strict';
 
+
+//------------------------FUNCTIONS----------------------------//
+//---------------function to calculate total cookies per hour for each store------
+
+//------------???? what is this again ?????-------------//
+
+// -----------------function to create new cookie store objects.(use of the .this method here)-------//
+function CookieStore(name, minCustomers, maxCustomers, avgCookies) {
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.avgCookies = avgCookies;
+}
+CookieStore.prototype.getAvgCookieCount = function (){
+  var range = this.maxCustomers - this.minCustomers;
+  return Math.floor(Math.random() * range + this.minCustomers);
+};
+console.log('------- EVENT LISTENERS--------');
+//---linking the js to the form tag and id on html---//
+var storeFormEl = document.getElementById('new-store-form');
+//---adding an event listener that when submit is executed it runs "handleSubmit" function
+storeFormEl.addEventListener('submit', handleSubmit);
+//---...---//
+function handleSubmit(event){
+  event.preventDefault();//---what does this do??---//
+  event.stopPropagation();//---what does this do??---//
+  var storeName = event.target.cookieStoreName.value;
+  var minCust = parseInt(event.target.minCustomersPerHour.value);
+  var maxCust = parseInt(event.target.maxCustomersPerHour.value);
+  var avgCookies = parseFloat(event.target.avgCookiesPerCustomer.value);
+  // console.log('User Pressed Submit Button on Form');
+  var store = new CookieStore(storeName, minCust, maxCust, avgCookies);
+  stores.push(store);
+  console.log(stores);
+  console.log(store);
+  console.log('store.getAvgCookieCount: ', store.getAvgCookieCount());
+}
+
 //-------------------------VARIABLES-------------------------//
 //---timeslot to loop through for rendering to dom and the length of calculations--//
 var timeSlot = {
@@ -55,9 +93,9 @@ for(var i = 0; i < stores.length; i++){
 //--for loop to produce cph stats for each time slot for this row (it is inside the store loop so it will go 16 times five different times....)
   for(var j = 0; j < timeSlot.times.length ; j++){
     var timeEl = document.createElement('td');
-    timeEl.textContent = cph();
+    timeEl.textContent = currentStore.getAvgCookieCount();
     rowEl.appendChild(timeEl);
-    total += cph();
+    total += currentStore.getAvgCookieCount();
   }
   //---render to dom the total in a column---//
   tableEl.appendChild(rowEl);
@@ -69,21 +107,12 @@ for(var i = 0; i < stores.length; i++){
 
 document.body.appendChild(tableEl);
 
-//------------------------FUNCTIONS----------------------------
-//---------------function to calculate total cookies per hour for each store------
-function cph(){
-  var avgCookiesPerHour = Math.ceil((Math.floor(Math.random() * ( currentStore.maxCustomers - currentStore.minCustomers + 1) + currentStore.minCustomers)) * currentStore.avgCookies);
-  return avgCookiesPerHour;
-};
-//------------???? what is this again ?????--------------------------------//
-// CookieStore.prototype.getAvgCookieCount = function (){
-//   var range = this.maxCustomers - this.minCustomers;
-//   return Math.floor(Math.random() * range + this.minCustomers);
-// };
-// -----------------function to create new cookie store objects.(use of the .this method here)-------//
-function CookieStore(name, minCustomers, maxCustomers, avgCookies) {
-  this.name = name;
-  this.minCustomers = minCustomers;
-  this.maxCustomers = maxCustomers;
-  this.avgCookies = avgCookies;
-}
+//--------NOTES------------//
+// var userElement = document.createElement('h1'); //Step 1 (create element), userElement = <h1></h1> now
+// userElement.setAttribute('id', 'first-user-heading'); //Step 2 (assign attributes), now userElement = <h1 id="first-user-heading"></h1>
+// userElement.textContent = myUser.FullName;
+// var sectionEl = document.getElementById('main-content'); // (get a reference to the parent), now, <section id = "main-content"></section>
+// sectionEl.appendChild(userElement); //Step 3 (hand it to the DOM), now
+//---VV supposed easier way VV---//
+// var userHeadingEl = document.getElementById('first-user-heading');
+// userHeadingEl.textContent = myUser.FullName;
