@@ -1,0 +1,38 @@
+img.center{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+}
+#new-store-form{
+  width: 15%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#cookieExp{
+  text-align: left;;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-size: 20px;
+
+label, input {
+    display: block;
+  }
+
+
+}
+#comeDown{
+  text-align: left;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-size: 20px;
+}
+
+#title{
+  text-align: center;
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+table{
+  text-align: center;
+}
