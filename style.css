@@ -14,13 +14,12 @@ img.center{
   margin-left: 20%;
   margin-right: 20%;
   font-size: 20px;
+}
 
-label, input {
+label, input{
     display: block;
   }
 
-
-}
 #comeDown{
   text-align: left;
   margin-left: 20%;

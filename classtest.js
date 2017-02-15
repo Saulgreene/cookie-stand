@@ -1,6 +1,5 @@
 'use strict';
 
-
 //------------------------FUNCTIONS----------------------------//
 //---------------function to calculate total cookies per hour for each store------
 
@@ -16,6 +15,28 @@ function CookieStore(name, minCustomers, maxCustomers, avgCookies) {
 CookieStore.prototype.getAvgCookieCount = function (){
   var range = this.maxCustomers - this.minCustomers;
   return Math.floor(Math.random() * range + this.minCustomers);
+};
+CookieStore.prototype.renderRow = function() {
+
+  var rowEl = document.createElement('tr');
+
+  var nameEl = document.createElement('th');
+  nameEl.textContent = this.name + ':';
+  rowEl.appendChild(nameEl);
+
+//--for loop to produce cph stats for each time slot for this row (it is inside the store loop so it will go 16 times five different times....)
+  for(var j = 0; j < timeSlot.times.length ; j++){
+    var timeEl = document.createElement('td');
+    timeEl.textContent = this.getAvgCookieCount();
+    rowEl.appendChild(timeEl);
+    total += this.getAvgCookieCount();
+  }
+  //---render to dom the total in a column---//
+  tableEl.appendChild(rowEl);
+  var totalEl = document.createElement('td');
+  totalEl.textContent = total;
+  rowEl.appendChild(totalEl);
+  total = 0;
 };
 console.log('------- EVENT LISTENERS--------');
 //---linking the js to the form tag and id on html---//
@@ -33,6 +54,7 @@ function handleSubmit(event){
   // console.log('User Pressed Submit Button on Form');
   var store = new CookieStore(storeName, minCust, maxCust, avgCookies);
   stores.push(store);
+  store.renderRow();
   console.log(stores);
   console.log(store);
   console.log('store.getAvgCookieCount: ', store.getAvgCookieCount());
@@ -45,11 +67,11 @@ var timeSlot = {
   times: ['6am|', '7am|', '8am|', '9am|', '10am|', '11am|', '12pm|', '1pm|', '2pm|', '3pm|', '4pm|', '5pm|', '6pm|', '7pm|'],
   totalLabel: 'Total|'};
 //---New store constructors--//
-var pikePlace = new CookieStore ('First and Pike:', 23, 65, 6.3);
-var seaTac = new CookieStore ('SeaTac:', 3, 24, 1.2);
-var seattleCenter = new CookieStore('Seattle Center:', 11, 38, 3.7);
-var capHill = new CookieStore('Capitol Hill:', 20, 38, 2.3);
-var alki = new CookieStore('Alki:', 2, 16, 4.6);
+var pikePlace = new CookieStore ('First and Pike', 23, 65, 6.3);
+var seaTac = new CookieStore ('SeaTac', 3, 24, 1.2);
+var seattleCenter = new CookieStore('Seattle Center', 11, 38, 3.7);
+var capHill = new CookieStore('Capitol Hill', 20, 38, 2.3);
+var alki = new CookieStore('Alki', 2, 16, 4.6);
 //-- array of the stores for easy access and pulling the info---//
 var stores = [pikePlace, seaTac, seattleCenter, capHill, alki];
 //---starts the total at zero so that we can calculate totals within the for loops. resetting to zero allows us to differentiate different rows---//
@@ -82,27 +104,8 @@ document.body.appendChild(tableEl);
 
 //---------for loop to get through the different stores--------------//
 for(var i = 0; i < stores.length; i++){
-  var currentStore = stores[i];
+  stores[i].renderRow();
 
-  var rowEl = document.createElement('tr');
-
-  var nameEl = document.createElement('th');
-  nameEl.textContent = currentStore.name;
-  rowEl.appendChild(nameEl);
-
-//--for loop to produce cph stats for each time slot for this row (it is inside the store loop so it will go 16 times five different times....)
-  for(var j = 0; j < timeSlot.times.length ; j++){
-    var timeEl = document.createElement('td');
-    timeEl.textContent = currentStore.getAvgCookieCount();
-    rowEl.appendChild(timeEl);
-    total += currentStore.getAvgCookieCount();
-  }
-  //---render to dom the total in a column---//
-  tableEl.appendChild(rowEl);
-  var totalEl = document.createElement('td');
-  totalEl.textContent = total;
-  rowEl.appendChild(totalEl);
-  total = 0;
 };
 
 document.body.appendChild(tableEl);
