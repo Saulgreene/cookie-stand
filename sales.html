@@ -7,12 +7,9 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <h1>Sales Information</h1>
     <section id="">
-      <!-- put this in the main page not the sales page... sales page should only have info for the owner...LINES:10-16 -->
-      <h1 id="title">--------------  Salmon Cookies  --------------</h1>
-      <img src="project-pictures/salmon.jpg" class="center"/>
-        <p id="cookieExp">Salmon cookies are cookies made into the shape of a salmon, and actually made with salmon (though the fish is ground up so fine that you can't even taste it!) that is the ideal match for a steaming cup of coffee on a gray Seattle morning. Or gray Seattle afternoon... </p>
-        <p id="comeDown">Come down to one of our stores! (placeholder)</p>
+
     </section>
     <div class="form">
       <form id="new-store-form">
@@ -21,11 +18,11 @@
           <label for="cookieStoreName">Store Name:</label>
           <input type="text" name="cookieStoreName">
           <label for="minCustomersPerHour">Min. Customers:</label>
-          <input type="text" name="minCustomersPerHour">
+          <input type="number" name="minCustomersPerHour">
           <label for="maxCustomersPerHour">Max. Customers:</label>
-          <input type="text" name="maxCustomersPerHour">
-          <label for="avgCookiesPerCustomer">Avg. Cookies:</label> 
-          <input type="text" name="avgCookiesPerCustomer">
+          <input type="number" name="maxCustomersPerHour">
+          <label for="avgCookiesPerCustomer">Avg. Cookies:</label>
+          <input type="decimal" name="avgCookiesPerCustomer">
             <button type="submit" >SUBMIT</button>
         </fieldset>
       </form>

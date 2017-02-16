@@ -4,7 +4,6 @@ var timeSlot = {
   times: ['6am|', '7am|', '8am|', '9am|', '10am|', '11am|', '12pm|', '1pm|', '2pm|', '3pm|', '4pm|', '5pm|', '6pm|', '7pm|'],
   totalLabel: 'Total|'
 };
-  //---New store constructors--//
 var pikePlace = new CookieStore ('First and Pike', 23, 65, 6.3);
 var seaTac = new CookieStore ('SeaTac', 3, 24, 1.2);
 var seattleCenter = new CookieStore('Seattle Center', 11, 38, 3.7);
@@ -13,6 +12,7 @@ var alki = new CookieStore('Alki', 2, 16, 4.6);
   //-- array of the stores for easy access and pulling the info---//
 var stores = [pikePlace, seaTac, seattleCenter, capHill, alki];
 var colTotals = [];
+var totalName = 'Total: ';
   //---starts the total at zero so that we can calculate totals within the for loops. resetting to zero allows us to differentiate different rows---//
 var total = 0;
   //---Creates the table element in the html that we insert into-----//
@@ -24,7 +24,7 @@ document.body.appendChild(tableEl);
 
 //------------???? what is this again ?????-------------//
 
-// -----------------function to create new cookie store objects.(use of the .this method here)-------//
+// -----------------function/constructor to create new cookie store objects.(use of the .this method here)-------//
 function CookieStore(name, minCustomers, maxCustomers, avgCookies) {
   this.name = name;
   this.minCustomers = minCustomers;
@@ -32,6 +32,7 @@ function CookieStore(name, minCustomers, maxCustomers, avgCookies) {
   this.avgCookies = avgCookies;
   this.hourlySales = [];
 }
+//--------prototype adding the ability to get the average cookies per hour for the constructor
 CookieStore.prototype.getAvgCookieCount = function (){
   var range = this.maxCustomers - this.minCustomers;
   return Math.floor(Math.random() * range + this.minCustomers);
@@ -63,8 +64,10 @@ var colTotalAdded = document.createElement('tr');
 colTotalAdded.textContent = colTotals;
 tableEl.appendChild(colTotalAdded);
 
+
 function columnTotals(){
-  for (var ii = 0; ii < timeSlot.times.length; ii++){
+  colTotals = [];
+  for (var ii = 0; ii < timeSlot.times.length ; ii++){
     var allStoreHourlyTotal = 0;
     for(var jj = 0; jj < stores.length; jj++){
       allStoreHourlyTotal += stores[jj].hourlySales[ii];
@@ -72,6 +75,11 @@ function columnTotals(){
     colTotals.push(allStoreHourlyTotal);
   };
   console.log(colTotals);
+  var totalTotal = 0;
+  for (var v = 0; v < colTotals.length; v++){
+    totalTotal += colTotals[v];
+  }
+  colTotals.push(totalTotal);
 }
 
 console.log('------- EVENT LISTENERS--------');
@@ -90,11 +98,14 @@ function handleSubmit(event){
   // console.log('User Pressed Submit Button on Form');
   var store = new CookieStore(storeName, minCust, maxCust, avgCookies);
   stores.push(store);
-  store.renderRow();
+  // store.renderRow();
   console.log(stores);
   console.log(store);
   console.log('store.getAvgCookieCount: ', store.getAvgCookieCount());
-}
+  removeTotalsRow();
+  drawTable();
+};
+
 
 //-------------------------VARIABLES-------------------------//
 //---timeslot to loop through for rendering to dom and the length of calculations--//
@@ -127,9 +138,31 @@ function drawAllStoreRows(){
   };
 }
 function drawColumnTotals(){
-  var totalRowEl = document.createElement('td');
-  totalRowEl.textContent = colTotals;
-  tableEl.appendChild(totalRowEl);
+  var tableRow = document.createElement('tr');
+  tableRow.setAttribute('id', 'totalRow');
+  var tableHead = document.createElement('th');
+  tableHead.textContent = totalName;
+  tableRow.appendChild(tableHead);
+  for (var m = 0; m < colTotals.length; m++){
+    var tableData = document.createElement('td');
+    tableData.textContent = colTotals[m];
+    tableRow.appendChild(tableData);
+  }
+  tableEl.appendChild(tableRow);
+}
+function removeTotalsRow(){
+  var remover = document.getElementById('totalRow');
+  remover.remove();
+}
+
+var totalRowEl = document.createElement('td');
+totalRowEl.textContent = colTotals;
+tableEl.appendChild(totalRowEl);
+function totalStoresHour(){
+  var footerEl = document.createElement('tr');
+  var totalStoresHourAdded = document.createElement('th');
+  totalStoresHourAdded.textContent = totalName;
+  footerEl.appendChild(totalStoresHourAdded);
 }
 function drawTable(){
   tableEl.textContent = '';
@@ -137,6 +170,9 @@ function drawTable(){
   drawAllStoreRows();
   columnTotals();
   drawColumnTotals();
+  totalStoresHour();
+  // removeTotalsRow();
+
 }
 drawTable();
 
