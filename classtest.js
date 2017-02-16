@@ -59,6 +59,10 @@ CookieStore.prototype.renderRow = function() {
   rowEl.appendChild(totalEl);
   total = 0;
 };
+var colTotalAdded = document.createElement('tr');
+colTotalAdded.textContent = colTotals;
+tableEl.appendChild(colTotalAdded);
+
 function columnTotals(){
   for (var ii = 0; ii < timeSlot.times.length; ii++){
     var allStoreHourlyTotal = 0;
@@ -123,9 +127,9 @@ function drawAllStoreRows(){
   };
 }
 function drawColumnTotals(){
-  var totalRowEl = document.createElement('tr');
-  totalRowEl.textContent = this.colTotals;
-  rowEl.appendChild(totalRowEl);
+  var totalRowEl = document.createElement('td');
+  totalRowEl.textContent = colTotals;
+  tableEl.appendChild(totalRowEl);
 }
 function drawTable(){
   tableEl.textContent = '';
