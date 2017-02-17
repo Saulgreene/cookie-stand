@@ -53,11 +53,15 @@ h1{
   margin-right: auto;
   border-radius: 150px;
   padding: 20px;
-  background-image: url(https://unsplash.com/photos/OR_3rbIv5yI);
 }
 h2{
 text-align: center;
-font-family:monospace
+font-family:monospace;
+}
+h2{
+  text-decoration: underline;
+}
+
 }
 p{
   text-align: left;;
@@ -87,5 +91,11 @@ label, input{
 #store-hours{
   display: inline;
   list-style-type: none;
+  text-align: center;
+}
+#comeDown{
+  text-align: center;
+}
+#llc{
   text-align: center;
 }
