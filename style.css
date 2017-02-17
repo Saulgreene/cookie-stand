@@ -1,28 +1,65 @@
 
 
-//////////////////////////////////////////
-div {
-  background-color: black;
-  border: 3px solid black;
-  width: 100px;
-  height: auto;
+nav li{
+  display: inline;
+  text-color: purple;
+  margin-left: auto;
 }
-img.center{
+nav ul{
+    padding: 2%;
+    background-color: pink;
+
+}
+div{
+  border: 2px solid black;
+  width: 50%;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+.nav-bar{
+  display: inline;
+  text-align: center;
+  font-family:monospace;
+  font-size: 20px;
+  border: 3px solid black;
+}
+img{
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 0px;
+  height: 100px;
+  width: 400px;
 }
+
 #new-store-form{
   width: 15%;
   margin-left: auto;
   margin-right: auto;
 }
+*{
 
-#cookieExp{
+}
+h1{
+  font-family:monospace;
+  border: 10px solid black;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 150px;
+  padding: 20px;
+  background-image: url(https://unsplash.com/photos/OR_3rbIv5yI);
+}
+h2{
+text-align: center;
+font-family:monospace
+}
+p{
   text-align: left;;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 5%;
+  margin-right: 5%;
   font-size: 20px;
 }
 
@@ -41,7 +78,11 @@ label, input{
   text-align: center;
   font-size: 50px;
   margin-bottom: 10px;
+  background: url(https://unsplash.com/photos/OR_3rbIv5yI);
 }
-table{
+
+#store-hours{
+  display: inline;
+  list-style-type: none;
   text-align: center;
 }
