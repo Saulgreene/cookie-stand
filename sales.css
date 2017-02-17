@@ -18,3 +18,12 @@ table{
   background-color: black;
   border: 2px solid black;
 }
+h1{
+  font-size: 60px;
+  text-align: left;
+}
+img{
+  float: center;
+  display: inline;
+  width: 10.8%;
+}
